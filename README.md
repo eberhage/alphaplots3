@@ -1,5 +1,5 @@
 # alphaplots3.py
-This script will scan a directory for subdirectories of the type "seed-<int>_sample-<int>" and use the confidences.json files of an AlphaFold3 output to generate the per-Atom plDDT distribution and a predicted alignment error (PAE) plot.
+This script will scan a directory for subdirectories of the type "seed-[int]_sample-[int]" and use the confidences.json files of an AlphaFold3 output to generate the per-Atom plDDT distribution and a predicted alignment error (PAE) plot.
 
 ## Example Usage
 Make plots. That's it. If the positional argument for the directory is empty, your current directory is assumed.
