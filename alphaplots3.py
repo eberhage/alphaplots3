@@ -1,4 +1,4 @@
-__version_info__ = (1, 0, 0)
+__version_info__ = (1, 0, 1)
 __version__ = '.'.join(map(str, __version_info__))
 __author__ = 'Jan Eberhage, Institute for Biophysical Chemistry, Hannover Medical School (eberhage.jan@mh-hannover.de)'
 
@@ -171,7 +171,7 @@ def process_input_dir(input_dir, nameprefix, sortingmethod):
         master_output_file = os.path.join(parent, name_master_pae)
         plt.savefig(master_output_file, dpi=300, bbox_inches='tight')
         plt.close()
-        print(f"Generated master plot »{master_output_file}« with sorting method »{sortingmethod}«.")
+        log.info(f"Generated master plot »{master_output_file}« with sorting method »{sortingmethod}«.")
 
 
 class CustomFormatter(logging.Formatter):
