@@ -1,4 +1,4 @@
-__version_info__ = (1, 0, 1)
+__version_info__ = (1, 0, 2)
 __version__ = '.'.join(map(str, __version_info__))
 __author__ = 'Jan Eberhage, Institute for Biophysical Chemistry, Hannover Medical School (eberhage.jan@mh-hannover.de)'
 
@@ -25,7 +25,12 @@ def load_json(file_path):
 
 def get_score(directory, score):
     """Fetches the ranking_score from summary_confidences.json in the given directory."""
-    json_path = os.path.join(directory, "summary_confidences.json")
+    parent_name = os.path.basename(os.path.dirname(os.path.abspath(directory)))
+    old_path = os.path.join(directory, "summary_confidences.json")
+    new_path = os.path.join(directory, f"{parent_name}_{os.path.basename(directory)}_summary_confidences.json")
+    
+    json_path = new_path if os.path.exists(new_path) else old_path
+
     try:
         with open(json_path, "r") as f:
             data = json.load(f)
@@ -130,7 +135,10 @@ def process_input_dir(input_dir, nameprefix, sortingmethod):
                     parent_directories[parent_dir] = []
                 subdir_path = os.path.join(root, subdir)
                 parent_directories[parent_dir].append(subdir_path)
-                data_file = os.path.join(subdir_path, "confidences.json")
+                parent_name = os.path.basename(os.path.abspath(root))
+                old_file = os.path.join(subdir_path, "confidences.json")
+                new_file = os.path.join(subdir_path, f"{parent_name}_{os.path.basename(subdir)}_confidences.json")
+                data_file = new_file if os.path.exists(new_file) else old_file
                 
                 if os.path.exists(data_file):
                     data = load_json(data_file)
